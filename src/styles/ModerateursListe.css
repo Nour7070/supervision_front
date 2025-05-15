@@ -1,0 +1,226 @@
+.moderateurs-liste-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.moderateurs-liste-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.moderateurs-liste-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.moderateurs-liste-container th,
+.moderateurs-liste-container td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/*hedou pour le bouton ajouter un moderateur*/
+
+.add-moderateur-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.add-moderateur-btn a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    /* Ajuste la largeur */
+    height: 40px;
+    /* Ajuste la hauteur */
+    background-color: #028280;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+    border: none;
+}
+
+.add-moderateur-btn a:hover {
+    background-color: #026060;
+}
+
+/*table*/
+
+.moderateurs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Changer la couleur de fond et le texte de l’en-tête */
+/*.moderateurs-table thead tr {
+    background-color: #008081 !important;
+    color: #333;
+}
+*/
+.moderateurs-table th {
+    padding: 12px;
+    text-align: left;
+    background-color: #80cbc4;
+    /*HEDI APRES NBEDELHA KI NELQA UNE BELLE COULEUR*/
+}
+
+/* Ajout d’une bordure et d’un fond pour les lignes */
+.moderateurs-table tbody tr {
+    border-bottom: 1px solid #ddd;
+    background-color: #FFFFFF;
+}
+
+.moderateurs-table tbody tr:hover {
+    background-color: #d1f5f0;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.moderateurs-table tbody tr:hover {
+    background-color: #c6e7e7;
+}
+
+/*Bordures plus définies*/
+.moderateurs-table th,
+.moderateurs-table td {
+    border-bottom: 1px solid #aad4d4;
+    padding: 12px;
+}
+
+/* recherche et statistique */
+.search-stats-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/*  barre de recherche */
+.search-input {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #aad4d4;
+    border-radius: 5px;
+    font-size: 16px;
+    height: 40px;
+}
+
+/* carte statistique */
+/*.stat-card {
+    background-color: #028280;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}*/
+
+
+/*Context design*/
+
+.context-menu {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.context-menu button {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.context-menu button:hover {
+    background: #f0f0f0;
+}
+
+.edit-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.stats-btn {
+    background-color: #028280;
+    color: white;
+}
+
+.permissions-btn {
+    background-color: #FFA500;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #388E3C;
+}
+
+.permissions-btn:hover {
+    background-color: #FF8C00;
+}
+
+.delete-btn:hover {
+    background-color: #D32F2F;
+}
+
+/*Pagination*/
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 10px;
+    gap: 8px;
+}
+
+.pagination li {
+    display: inline-block;
+    padding: 8px 12px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination li:hover {
+    background: #ddd;
+}
+
+.pagination .active {
+    background: #f0f0f0;
+    color: white;
+    font-weight: bold;
+}

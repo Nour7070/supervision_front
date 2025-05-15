@@ -1,0 +1,447 @@
+    /* Hda green #034732;
+      Hada yellow  #FACC15;*/
+
+    import React, { useState, useEffect } from 'react';
+    import { Link, Outlet, Navigate , useParams } from 'react-router-dom';
+    import { FiHome, FiSettings, FiUsers, FiFileText, FiMenu, FiX, FiBell, FiSearch, FiLogOut , FiBook , FiUser } from 'react-icons/fi';
+    import axios from '../axios';
+    /*const Layout = ({ onLogout }) =>
+    {
+      //const [userType, setUserType] = useState(null);
+      const [sidebarOpen, setSidebarOpen] = useState(true);
+      const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+      const { userType } = useParams(); 
+*/
+      /*useEffect(() => {
+       // localStorage.setItem('userType', 'MODERATEUR');
+        
+        
+        const storedUserType = localStorage.getItem('userType');
+        setUserType(storedUserType);
+      }, []);*/
+
+      
+      /*const Layout = ({ onLogout }) => {
+        const [userType, setUserType] = useState(null);
+        const [isLoading, setIsLoading] = useState(true);
+        const [sidebarOpen, setSidebarOpen] = useState(true);
+        const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+      
+        useEffect(() => {
+          const storedUserType = localStorage.getItem('userType');
+          setUserType(storedUserType);
+          setIsLoading(false); // important : attendre la fin du chargement
+        }, []);
+      
+        if (isLoading) {
+          return <div className="p-8 text-center text-gray-600">Chargement...</div>;
+        }
+      
+        if (userType !== "SUPERVISEUR" && userType !== "MODERATEUR") {
+          return <Navigate to="/unauthorized" />;
+        }
+
+      console.log("URL actuelle :", window.location.href);
+      console.log("Domaine complet :", window.location.host); 
+      console.log("Nom de domaine :", window.location.hostname); 
+      return (
+        <div className="flex h-screen bg-gray-100 ">
+          <div className={`hidden md:flex md:flex-shrink-0 ${sidebarOpen ? 'w-60' : 'w-12'} bg-[#034732] transition-all duration-300 flex-col z-20 `}>
+            <div className="flex-1 overflow-y-auto">
+              <nav className="px-2 pt-10 pb-4">
+                <Link
+                  to="/dashboard"
+                  className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-3 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+            >
+                  <span className="text-xl"><FiHome /></span>
+                  {sidebarOpen && (
+                    <span className="ml-3 transition-all duration-200">Dashboard</span>
+                  )}
+                </Link>
+                <Link
+      to="/admin/course-requests"
+      className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-3 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+    >
+      <span className="text-xl"><FiBook /></span>
+      {sidebarOpen && (
+        <span className="ml-3 transition-all duration-200">Courses Requests</span>
+      )}
+    </Link>
+
+    <Link
+      to="/admin/trainer-requests"
+      className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-3 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+    >
+      <span className="text-xl"><FiUser /></span>
+      {sidebarOpen && (
+        <span className="ml-3 transition-all duration-200">Trainers Requests</span>
+      )}
+    </Link>
+
+                {userType === "SUPERVISEUR" && (
+                  <Link
+                    to="/moderateurs"
+                    className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-3 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+                    >
+                    <span className="text-xl"><FiUsers /></span>
+                    {sidebarOpen && (
+                      <span className="ml-3 transition-all duration-200">Moderators</span>
+                    )}
+                  </Link>
+                )}
+
+                <Link
+                  to="/users/formateur"
+                  className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-3 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+            >
+                  <span className="text-xl"><FiFileText /></span>
+                  {sidebarOpen && (
+                    <span className="ml-3 transition-all duration-200">Trainers</span>
+                  )}
+                </Link>
+
+                <Link
+                  to="/users/apprenant"
+                  className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-3 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+            >
+                  <span className="text-xl"><FiUsers /></span>
+                  {sidebarOpen && (
+                    <span className="ml-3 transition-all duration-200">Students</span>
+                  )}
+                </Link>
+              </nav>
+            </div>
+            <div className="px-2 pb-4">
+        <button
+          onClick={onLogout} 
+          className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-2 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+        >
+          <span className="text-xl"><FiLogOut /></span>
+          {sidebarOpen && (
+            <span className="ml-3 transition-all duration-200">Log out</span>
+          )}
+        </button>
+      </div>
+          </div>
+          
+          {mobileSidebarOpen && (
+            <div
+              className="fixed inset-0 z-10 bg-black bg-opacity-50 md:hidden"
+              onClick={() => setMobileSidebarOpen(false)}
+            ></div>
+          )}
+
+    <div className={`fixed inset-y-0 left-0 z-20 w-80 bg-[#034732] transform ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:hidden transition-transform duration-300`}>
+        <div className="flex items-center justify-between h-10 px-4 bg-[#034732]">
+          <button onClick={() => setMobileSidebarOpen(false)} className="text-white p-1 rounded-md hover:bg-[#034732]">
+            <FiX size={24} />
+          </button>
+        </div>
+            <nav className="px-2 py-4">
+              <Link
+                to="/dashboard"
+                className="flex items-center px-4 py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg"
+                onClick={() => setMobileSidebarOpen(false)}
+              >
+                <FiHome className="text-xl" />
+                <span className="ml-3">Dashboard</span>
+              </Link>
+
+              {userType === "SUPERVISEUR" && (
+                <Link
+                  to="/moderateurs"
+                  className="flex items-center px-4 py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg"
+                  onClick={() => setMobileSidebarOpen(false)}
+                >
+                  <FiUsers className="text-xl" />
+                  <span className="ml-3">Moderators</span>
+                </Link>
+              )}
+
+              <Link
+                to="/users/formateur"
+                className="flex items-center px-4 py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg"
+                onClick={() => setMobileSidebarOpen(false)}
+              >
+                <FiFileText className="text-xl" />
+                <span className="ml-3">Trainers</span>
+              </Link>
+
+              <Link
+                to="/users/apprenant"
+                className="flex items-center px-4 py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg"
+                onClick={() => setMobileSidebarOpen(false)}
+              >
+                <FiUsers className="text-xl" />
+                <span className="ml-3">Students</span>
+              </Link>
+
+              <button
+                onClick={() =>
+                {
+                  onLogout();
+                  setMobileSidebarOpen(false);
+                }}
+                className="w-full flex items-center px-4 py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg mt-4"
+              >
+                <FiLogOut className="text-xl" />
+                <span className="ml-3">Log out</span>
+              </button>
+            </nav>
+          </div>
+
+
+          <div className="flex-1 flex flex-col overflow-hidden">
+            <header className="bg-[#034732] shadow-sm z-10">
+              <div className="flex items-center justify-between h-10 px-4">
+                <div className="flex items-center">
+                  <button
+                    onClick={() => setMobileSidebarOpen(true)}
+                    className="md:hidden text-gray-500 p-1 rounded-md hover:bg-gray[#034732]"
+                  >
+                    <FiMenu size={24} />
+                  </button>
+                  <button
+                    onClick={() => setSidebarOpen(!sidebarOpen)}
+                    className="hidden md:block ml-2 text-white p-1 rounded-md hover:bg-[#07885F]"
+                  >
+                    <FiMenu size={24} />
+                  </button>
+            
+                </div>
+                <div className="flex items-center space-x-4">
+                  
+                  <div className="flex items-center">
+                    <div className="h-8 w-8 rounded-full bg-[#FACC15] flex items-center justify-center text-white font-medium">
+                      {userType?.charAt(0)}
+                    </div>
+                    <span className="ml-2 text-sm font-medium text-white hidden md:inline">
+                      {userType === "SUPERVISEUR" ? "Supervisor" : "Moderator"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            <main className="flex-1 overflow-y-auto p-4 bg-gray-50"
+              style={{
+                whidth : '100%',
+                height: 'calc(100vh - 4rem)',
+                transition: 'margin-left 0.3s ease' 
+              }}>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <Outlet />
+              </div>
+            </main>
+          </div>
+        </div>
+      );
+    };
+
+    export default Layout;
+*/
+const Layout = ({ onLogout }) => {
+  const { userType } = useParams(); 
+  const formattedType = userType?.toUpperCase(); 
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
+
+  if (formattedType !== "SUPERVISEUR" && formattedType !== "MODERATEUR") {
+    return <Navigate to="/unauthorized" />;
+  }
+
+  return (
+    <div className="flex h-screen bg-gray-100 ">
+      <div className={`hidden md:flex md:flex-shrink-0 ${sidebarOpen ? 'w-60' : 'w-12'} bg-[#034732] transition-all duration-300 flex-col z-20 `}>
+        <div className="flex-1 overflow-y-auto">
+          <nav className="px-2 pt-10 pb-4">
+            <Link
+             to={`/dashboard/${userType}`}
+              className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-3 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+            >
+              <span className="text-xl"><FiHome /></span>
+              {sidebarOpen && (
+                <span className="ml-3 transition-all duration-200">Dashboard</span>
+              )}
+            </Link>
+
+            <Link
+              to={`/dashboard/${userType}/admin/course-requests`}
+              className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-3 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+            >
+              <span className="text-xl"><FiBook /></span>
+              {sidebarOpen && (
+                <span className="ml-3 transition-all duration-200">Courses Requests</span>
+              )}
+            </Link>
+
+            <Link
+              to={`/dashboard/${userType}/admin/trainer-requests`}
+              className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-3 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+            >
+              <span className="text-xl"><FiUser /></span>
+              {sidebarOpen && (
+                <span className="ml-3 transition-all duration-200">Trainers Requests</span>
+              )}
+            </Link>
+
+            {formattedType === "SUPERVISEUR" && (
+              <Link
+                to={`/dashboard/${userType}/moderateurs`}
+                className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-3 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+              >
+                <span className="text-xl"><FiUsers /></span>
+                {sidebarOpen && (
+                  <span className="ml-3 transition-all duration-200">Moderators</span>
+                )}
+              </Link>
+            )}
+
+            <Link
+              to={`/dashboard/${userType}/users/formateur`}
+              className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-3 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+            >
+              <span className="text-xl"><FiFileText /></span>
+              {sidebarOpen && (
+                <span className="ml-3 transition-all duration-200">Trainers</span>
+              )}
+            </Link>
+
+            <Link
+              to={`/dashboard/${userType}/users/apprenant`}
+              className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-3 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+            >
+              <span className="text-xl"><FiUsers /></span>
+              {sidebarOpen && (
+                <span className="ml-3 transition-all duration-200">Students</span>
+              )}
+            </Link>
+          </nav>
+        </div>
+
+        <div className="px-2 pb-4">
+          <button
+            onClick={onLogout}
+            className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-2 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+          >
+            <span className="text-xl"><FiLogOut /></span>
+            {sidebarOpen && (
+              <span className="ml-3 transition-all duration-200">Log out</span>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {mobileSidebarOpen && (
+        <div
+          className="fixed inset-0 z-10 bg-black bg-opacity-50 md:hidden"
+          onClick={() => setMobileSidebarOpen(false)}
+        ></div>
+      )}
+
+      <div className={`fixed inset-y-0 left-0 z-20 w-80 bg-[#034732] transform ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:hidden transition-transform duration-300`}>
+        <div className="flex items-center justify-between h-10 px-4 bg-[#034732]">
+          <button onClick={() => setMobileSidebarOpen(false)} className="text-white p-1 rounded-md hover:bg-[#034732]">
+            <FiX size={24} />
+          </button>
+        </div>
+        <nav className="px-2 py-4">
+          <Link
+             to={`/dashboard/${userType}`}
+            className="flex items-center px-4 py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg"
+            onClick={() => setMobileSidebarOpen(false)}
+          >
+            <FiHome className="text-xl" />
+            <span className="ml-3">Dashboard</span>
+          </Link>
+
+          {formattedType === "SUPERVISEUR" && (
+            <Link
+              to={`/dashboard/${userType}/moderateurs`}
+              className="flex items-center px-4 py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg"
+              onClick={() => setMobileSidebarOpen(false)}
+            >
+              <FiUsers className="text-xl" />
+              <span className="ml-3">Moderators</span>
+            </Link>
+          )}
+
+          <Link
+            to={`/dashboard/${userType}/users/formateur`}
+            className="flex items-center px-4 py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg"
+            onClick={() => setMobileSidebarOpen(false)}
+          >
+            <FiFileText className="text-xl" />
+            <span className="ml-3">Trainers</span>
+          </Link>
+
+          <Link
+            to={`/dashboard/${userType}`}
+            className="flex items-center px-4 py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg"
+            onClick={() => setMobileSidebarOpen(false)}
+          >
+            <FiUsers className="text-xl" />
+            <span className="ml-3">Students</span>
+          </Link>
+
+          <button
+            onClick={() => {
+              onLogout();
+              setMobileSidebarOpen(false);
+            }}
+            className="w-full flex items-center px-4 py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg mt-4"
+          >
+            <FiLogOut className="text-xl" />
+            <span className="ml-3">Log out</span>
+          </button>
+        </nav>
+      </div>
+
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <header className="bg-[#034732] shadow-sm z-10">
+          <div className="flex items-center justify-between h-10 px-4">
+            <div className="flex items-center">
+              <button
+                onClick={() => setMobileSidebarOpen(true)}
+                className="md:hidden text-gray-500 p-1 rounded-md hover:bg-gray[#034732]"
+              >
+                <FiMenu size={24} />
+              </button>
+              <button
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                className="hidden md:block ml-2 text-white p-1 rounded-md hover:bg-[#07885F]"
+              >
+                <FiMenu size={24} />
+              </button>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center">
+                <div className="h-8 w-8 rounded-full bg-[#FACC15] flex items-center justify-center text-white font-medium">
+                  {formattedType.charAt(0)}
+                </div>
+                <span className="ml-2 text-sm font-medium text-white hidden md:inline">
+                  {formattedType === "SUPERVISEUR" ? "Supervisor" : "Moderator"}
+                </span>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main className="flex-1 overflow-y-auto p-4 bg-gray-50"
+          style={{
+            width: '100%',
+            height: 'calc(100vh - 4rem)',
+            transition: 'margin-left 0.3s ease'
+          }}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Outlet />
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+};
+
+export default Layout;

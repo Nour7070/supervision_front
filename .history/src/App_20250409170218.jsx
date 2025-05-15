@@ -1,0 +1,39 @@
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+import Navbar from './components/Navbar';
+import Dashboard from './pages/Dashboard';
+import CourseValidations from './pages/CourseValidations';
+import FormateurValidations from './pages/FormateurValidations';
+//import Moderateurs from './pages/Moderateurs';
+//import Users from './pages/Users';
+
+function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  return (
+    <Router>
+      <div className="flex h-screen bg-gray-100">
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+          
+          <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/validations" element={<CourseValidations />} />
+              <Route path="/formateurs" element={<FormateurValidations />} />
+              
+            </Routes>
+          </main>
+        </div>
+      </div>
+    </Router>
+  );
+}
+
+export default App;

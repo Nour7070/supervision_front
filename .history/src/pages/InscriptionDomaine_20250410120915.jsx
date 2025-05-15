@@ -1,0 +1,84 @@
+import { useState } from 'react';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
+export default function InscriptionsByDomaineChart({ data, colors }) {
+  const [activeYear] = useState(new Date().getFullYear());
+
+  return (
+    <div className="bg-white p-4 rounded-lg shadow mb-6">
+      <div className="flex justify-between items-center mb-4">
+        <div>
+          <h2 className="text-lg font-medium text-gray-700">Inscriptions par Domaine</h2>
+          <p className="text-sm text-gray-500">Évolution annuelle {activeYear}</p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <span className="text-xs text-gray-500">Janvier - Décembre {activeYear}</span>
+        </div>
+      </div>
+      
+      <div className="h-64">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            data={data}
+            margin={{
+              top: 10,
+              right: 30,
+              left: 0,
+              bottom: 0,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <XAxis dataKey="mois" />
+            <YAxis />
+            <Tooltip 
+              formatter={(value, name) => {
+                return [`${value} inscriptions`, name.charAt(0).toUpperCase() + name.slice(1)];
+              }}
+            />
+            <Legend />
+            <Area 
+              type="monotone" 
+              dataKey="i" 
+              name="Informatique"
+              stroke={colors.informatique} 
+              fill={colors.informatique} 
+              fillOpacity={0.5} 
+            />
+            <Area 
+              type="monotone" 
+              dataKey="marketing" 
+              name="Marketing"
+              stroke={colors.marketing} 
+              fill={colors.marketing} 
+              fillOpacity={0.5} 
+            />
+            <Area 
+              type="monotone" 
+              dataKey="finance" 
+              name="Finance"
+              stroke={colors.finance} 
+              fill={colors.finance} 
+              fillOpacity={0.5} 
+            />
+            <Area 
+              type="monotone" 
+              dataKey="design" 
+              name="Design"
+              stroke={colors.design} 
+              fill={colors.design} 
+              fillOpacity={0.5} 
+            />
+            <Area 
+              type="monotone" 
+              dataKey="langues" 
+              name="Langues"
+              stroke={colors.langues} 
+              fill={colors.langues} 
+              fillOpacity={0.5} 
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}

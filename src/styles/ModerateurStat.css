@@ -1,0 +1,40 @@
+.stats-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Titres principaux */
+.stats-container h1, .stats-container h2 {
+    color: #028280;
+    text-align: center;
+}
+
+/* ✅ Liste des actions, cours et plaintes */
+.stats-container ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+/* ✅ Élément de la liste */
+.stats-container li {
+    background: #e0f2f1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ✅ Nom de l'enseignant */
+.enseignant {
+    font-size: 12px;
+    font-style: italic;
+    color: #555;
+    margin-top: 5px;
+}

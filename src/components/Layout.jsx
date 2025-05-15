@@ -12,6 +12,11 @@ const Layout = ({ onLogout }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
+     const handleLogout = () => {
+    localStorage.removeItem("userType");
+    window.location.href = `http://localhost:5173`;
+  };
+
 
   if (formattedType !== "SUPERVISEUR" && formattedType !== "MODERATEUR") {
     return <Navigate to="/unauthorized" />;
@@ -86,17 +91,17 @@ const Layout = ({ onLogout }) => {
           </nav>
         </div>
 
-        <div className="px-2 pb-4">
-          <button
-            onClick={onLogout}
-            className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-2 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
-          >
-            <span className="text-xl"><FiLogOut /></span>
-            {sidebarOpen && (
-              <span className="ml-3 transition-all duration-200">Log out</span>
-            )}
-          </button>
-        </div>
+          <div className="px-2 pb-4">
+        <button
+          onClick={handleLogout}
+          className={`flex items-center ${sidebarOpen ? 'px-4' : 'px-2 justify-center'} py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg group`}
+        >
+          <span className="text-xl"><FiLogOut /></span>
+          {sidebarOpen && (
+            <span className="ml-3 transition-all duration-200">Log out</span>
+          )}
+        </button>
+      </div>
       </div>
 
       {mobileSidebarOpen && (
@@ -152,15 +157,15 @@ const Layout = ({ onLogout }) => {
           </Link>
 
           <button
-            onClick={() => {
-              onLogout();
-              setMobileSidebarOpen(false);
-            }}
-            className="w-full flex items-center px-4 py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg mt-4"
-          >
-            <FiLogOut className="text-xl" />
-            <span className="ml-3">Log out</span>
-          </button>
+        onClick={() => {
+          handleLogout();
+          setMobileSidebarOpen(false);
+        }}
+        className="w-full flex items-center px-4 py-3 text-indigo-100 hover:bg-[#07885F] rounded-lg mt-4"
+      >
+        <FiLogOut className="text-xl" />
+        <span className="ml-3">Log out</span>
+      </button>
         </nav>
       </div>
 

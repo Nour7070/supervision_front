@@ -238,17 +238,15 @@
           forcePage={currentPage}
         />
 
-        {userType === 'SUPERVISEUR' && (
-          <div className="mt-6 text-center">
+        <div className="mt-6 text-center">
             <Link
-              to="/moderateurs/add"
+               to={`/dashboard/SUPERVISEUR/moderateurs/add`}
               className="bg-gray-200 text-black py-2 px-6 rounded-lg hover:bg-gray-400 shadow-md hover:shadow-lg transition-all duration-200 inline-flex items-center"
             >
               <FiUserPlus className="mr-2" />
               Add a moderator
             </Link>
           </div>
-        )}
 
         {showConfirmModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
